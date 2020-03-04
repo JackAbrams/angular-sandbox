@@ -1,0 +1,110 @@
+<p>{{componentName}} works!</p>
+<p>{{2+2}}</p>
+<p>{{"Welcome " + componentName}}</p>
+<p>{{componentName.length}}</p>
+<p>{{componentName.toUpperCase()}}</p>
+<p>{{greetUser()}}</p>
+<p>{{pageUrl}}</p>
+<input [id]="myId" type="text">
+<input id="{{myId}}" type="text">
+<input [disabled]="isDisabled" type="text">
+<h2 [class.text-danger]="hasError">Class Binding</h2>
+<h2 [ngClass]="messageClasses">ngClass Directive</h2>
+<h2 [style.color]="hasError ? 'red' : 'green'">conditional style binding</h2>
+<h2 [ngStyle]="titleStyles">ngStyle Directive</h2>
+<button (click)="onClick($event)">Greet</button>
+<span>{{greeting}}</span>
+<button (click)="greeting='define event without event handler'">Greet</button>
+<!-- #myInput is a template reference variable -->
+<div>
+  <input #myInput type="text">
+  <button (click)="logMessage(myInput.value)">Log</button>
+</div>
+<div>
+  <!-- Be sure to import "FormsModule" in app.module.ts and execute npm install @angular/forms from root directory -->
+  <h2> This is two-way binding </h2>
+  <input [(ngModel)]="name" type="text">
+  {{name}}
+</div>
+
+<!-- Structural Directives -->
+<!-- ngIf -->
+<div>
+  <h2 *ngIf="displayName; else hideName">ngIf</h2>
+
+  <ng-template #hideName>
+    <h2>Name is hidden</h2>
+  </ng-template>
+</div>
+
+<!-- Alternate way to do ngIf -->
+
+<div *ngIf="displayName; then thenBlock; else elseBlock"></div>
+
+<ng-template #thenBlock>
+  <h2>thenBlock</h2>
+</ng-template>
+
+<ng-template #elseBlock>
+  <h2>elseBlock</h2>
+</ng-template>
+
+<!-- ngSwitch Directive -->
+<div [ngSwitch]="color">
+  <div *ngSwitchCase = "'red'">You picked red color</div>
+  <div *ngSwitchCase = "'blue'">You picked blue color</div>
+  <div *ngSwitchCase = "'green'">You picked green color</div>
+  <div *ngSwitchDefault>Pick again</div>
+</div>
+
+<!-- ngFor Directive -->
+<div *ngFor="let color of colors; index as i; first as f; last as l; odd as o; even as e">
+
+  <div *ngIf="e; then even; else odd"></div>
+
+  <ng-template #even>
+    <h2 [style.color]="color" [style.fontStyle] = "'italic'">{{f}} {{l}} {{i}} {{color}} {{o}} {{e}}</h2>
+  </ng-template>
+
+  <ng-template #odd>
+    <h2 [style.color]="color">{{f}} {{l}} {{i}} {{color}} {{o}} {{e}}</h2>
+  </ng-template>
+
+</div>
+
+<!-- Component Interaction from parent to child -->
+<div>
+  <h2>Hello {{parentData}}</h2>
+  <h2>Hello {{moreData}}</h2>
+</div>
+<!-- Component interaction from child to parent -->
+<div>
+  <button (click)="fireEvent()">Send Event</button>
+</div>
+
+<!-- Pipes -->
+<div>
+  <h2>{{ pipeExample }}</h2>
+  <h2>{{ pipeExample | lowercase }}</h2>
+  <h2>{{ pipeExample | uppercase }}</h2>
+  <h2>{{ titleCaseExample | titlecase }}</h2>
+  <h2>{{ pipeExample | slice:1 }}</h2>
+  <h2>{{ pipeExample | slice:1:3 }}</h2>
+  <h2>{{ pipeExample | lowercase }}</h2>
+  <h2>{{ person | json }}</h2>
+
+  <h2>{{ 5.678 | number:'1.2-3' }}</h2>
+  <h2>{{ 5.678 | number:'3.4-5' }}</h2>
+  <h2>{{ 5.678 | number:'3.1-2' }}</h2>
+
+  <h2>{{ 0.25 | percent }}</h2>
+
+  <h2>{{ 0.25 | currency }}</h2>
+  <h2>{{ 0.25 | currency: 'GBP' }}</h2>
+  <h2>{{ 0.25 | currency: 'GBP': 'code' }} </h2>
+
+  <h2>{{ date }}</h2>
+  <h2>{{ date | date: 'short' }}</h2>
+  <h2>{{ date | date: 'shortDate' }}</h2>
+  <h2>{{ date | date: 'shortTime' }}</h2>
+</div>
