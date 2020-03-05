@@ -28,7 +28,10 @@ export class Route1Component implements OnInit {
   }
 
   onSelect(department) {
-    this.router.navigate(['/route1', department.id]);
+    //absolute navigation
+    //this.router.navigate(['/route1', department.id]);
+    //relative navigation
+    this.router.navigate([department.id], {relativeTo: this.route});
   }
 
   isSelected(department) {
